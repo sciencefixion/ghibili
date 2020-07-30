@@ -4,18 +4,34 @@
 require 'json'
 require 'pry'
 require './film'
+require './person'
 require './ghibili_service'
+#
+# film_data = GhibiliService.new.all_films
+#
+# films = film_data.map do |film_attributes|
+#   Film.new(film_attributes)
+# end
+#
+# films.each do |film|
+#   puts film.title
+#   puts "Directed by: #{film.director}"
+#   puts "Produced by: #{film.producer}"
+#   puts "Rotten Tomatoes Score: #{film.rotten_tomatoes}"
+#   puts "__________________________________________"
+# end
 
-film_data = GhibiliService.new.all_films
+people_data = GhibiliService.new.all_people
 
-films = film_data.map do |film_attributes|
-  Film.new(film_attributes)
+people = people_data.map do |person_attributes|
+  Person.new(person_attributes)
 end
 
-films.each do |film|
-  puts film.title
-  puts "Directed by: #{film.director}"
-  puts "Produced by: #{film.producer}"
-  puts "Rotten Tomatoes Score: #{film.rotten_tomatoes}"
-  puts "__________________________________________"
+people.each do |person|
+  puts person.name
+  puts "Films:"
+  person.films.each do |film|
+    puts film.title
+  end
+  puts "========================"
 end
